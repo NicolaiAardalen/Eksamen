@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,21 @@ namespace BusinessLayer
         public List<ElevData> GetAllElevDataWhereFagnavn(string Fagnavn)
         {
             return dbl.GetAllElevDataWhereFagnavn(Fagnavn);
+        }
+
+        public List<ElevData> GetCountByKlasseNavn1A()
+        {
+            return dbl.GetCountByKlasseNavn1A();
+        }
+
+        public List<ElevData> GetCountByKlasseNavn1B()
+        { 
+            return dbl.GetCountByKlasseNavn1B();
+        }
+
+        public List<ElevData> GetTeacherData()
+        {
+            return dbl.GetTeacherData();
         }
     }
 }

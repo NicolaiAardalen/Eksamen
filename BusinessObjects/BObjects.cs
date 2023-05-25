@@ -15,5 +15,6 @@ namespace BusinessObjects
         public string Poststed { get; set; }
         public string Klassenavn { get; set; }
         public string Fagnavn { get; set; }
+        public string Lærernavn { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -140,6 +141,70 @@ namespace DatabaseLayer
                     ed.Adresse = (string)reader["Adresse"];
                     ed.PostNr = (int)reader["PostNr"];
                     ed.Poststed = (string)reader["Poststed"];
+                    ed.Klassenavn = (string)reader["Klassenavn"];
+                    ed.Fagnavn = (string)reader["Fagnavn"];
+                    ElevData.Add(ed);
+                }
+                reader.Close();
+                conn.Close();
+
+                return ElevData;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public List<ElevData> GetCountByKlasseNavn1A()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
+            List<ElevData> ElevData = new List<ElevData>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+
+            {
+
+                conn.Open();
+                SqlCommand cmd = new SqlCommand($"SELECT Fornavn FROM Elev, Klasse WHERE Elev.KlasseID = 1 AND Elev.KlasseID = Klasse.KlasseID", conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+                conn.Close();
+            }
+            return ElevData;
+        }
+
+        public List<ElevData> GetCountByKlasseNavn1B()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
+            List<ElevData> ElevData = new List<ElevData>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+
+            {
+
+                conn.Open();
+                SqlCommand cmd = new SqlCommand($"SELECT Fornavn FROM Elev, Klasse WHERE Elev.KlasseID = 2 AND Elev.KlasseID = Klasse.KlasseID", conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+                conn.Close();
+            }
+            return ElevData;
+        }
+
+        public List<ElevData> GetTeacherData()
+        {
+            try
+            {
+                List<ElevData> ElevData = new List<ElevData>();
+
+                conn.Open();
+                SqlCommand cmd = new SqlCommand($"SELECT Lærernavn, KlasseNavn, Fagnavn FROM Lærer, Klasse, KlasseLærer, Fag, FagLærer WHERE Klasse.KlasseID = KlasseLærer.KlasseID AND Lærer.LærerID = KlasseLærer.LærerID\r\nAND FagLærer.LærerID = Lærer.LærerID AND Fag.FagKode = FagLærer.FagKode", conn);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ElevData ed = new ElevData();
+                    ed.Lærernavn = (string)reader["Lærernavn"];
                     ed.Klassenavn = (string)reader["Klassenavn"];
                     ed.Fagnavn = (string)reader["Fagnavn"];
                     ElevData.Add(ed);
