@@ -23,7 +23,7 @@
         <asp:Button ID="AlleEleverButton" runat="server" Text="Se alle elever" OnClick="AlleEleverButton_Click" />
         <br />
         <br />
-        <asp:GridView ID="ElevGridView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Height="146px" Width="209px" OnSelectedIndexChanged="ElevGridView_SelectedIndexChanged1">
+        <asp:GridView ID="ElevGridView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Height="146px" PageSize="10" AllowPaging="true" Width="209px" OnPageIndexChanging="Elev_PageIndexChanging" OnSelectedIndexChanged="ElevGridView_SelectedIndexChanged1">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

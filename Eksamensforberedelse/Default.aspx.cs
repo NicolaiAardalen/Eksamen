@@ -51,28 +51,33 @@ namespace Eksamensforberedelse
             ElevGridView.DataSource = bl.GetAllElevDataFromElevByJoin();
             ElevGridView.DataBind();
         }
-
-        protected void ElevGridView_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            //ElevGridView.PageIndex = e.NewPageIndex;
-            //ElevGridView.DataSource = bl.GetAllElevDataWhereFornavn(SøkFornavnTextBox.Text);
-            //ElevGridView.DataBind();
-        }
-
         protected void GetKlassecount1A_Click(object sender, EventArgs e)
         {
-            countKlassemembers.Text = bl.GetCountByKlasseNavn1A().ToString();
+            countKlassemembers.Text = bl.GetCountByKlasseNavn1A().Count().ToString();
         }
 
         protected void GetKlassecount1B_Click(object sender, EventArgs e)
         {
-            countKlassemembers.Text = bl.GetCountByKlasseNavn1B().ToString();
+            countKlassemembers.Text = bl.GetCountByKlasseNavn1B().Count().ToString();
         }
 
         protected void TeacherReportButton_Click(object sender, EventArgs e)
         {
             ElevGridView.DataSource = bl.GetTeacherData();
             ElevGridView.DataBind();
+        }
+
+
+        protected void Elev_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            ElevGridView.DataSource = bl.GetAllElevDataFromElevByJoin();
+            ElevGridView.PageIndex = e.NewPageIndex;
+            ElevGridView.DataBind();
+        }
+
+        protected void ElevGridView_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+
         }
     }
 }

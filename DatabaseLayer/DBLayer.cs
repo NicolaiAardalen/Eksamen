@@ -167,6 +167,14 @@ namespace DatabaseLayer
                 conn.Open();
                 SqlCommand cmd = new SqlCommand($"SELECT Fornavn FROM Elev, Klasse WHERE Elev.KlasseID = 1 AND Elev.KlasseID = Klasse.KlasseID", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ElevData ed = new ElevData();
+                    ed.Fornavn = (string)reader["Fornavn"];
+                    ElevData.Add(ed);
+                }
+
                 reader.Close();
                 conn.Close();
             }
@@ -184,6 +192,14 @@ namespace DatabaseLayer
                 conn.Open();
                 SqlCommand cmd = new SqlCommand($"SELECT Fornavn FROM Elev, Klasse WHERE Elev.KlasseID = 2 AND Elev.KlasseID = Klasse.KlasseID", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ElevData ed = new ElevData();
+                    ed.Fornavn = (string)reader["Fornavn"];
+                    ElevData.Add(ed);
+                }
+
                 reader.Close();
                 conn.Close();
             }
